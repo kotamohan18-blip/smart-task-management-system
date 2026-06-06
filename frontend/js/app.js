@@ -1,5 +1,5 @@
 // Global Configuration
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://todolist1-t3bp.onrender.com/api';
 
 // Global Utility for Toasts
 window.showToast = function(message, type = 'success') {
