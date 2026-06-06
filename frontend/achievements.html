@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements - TaskMaster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body light-theme">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <i class="fas fa-bolt text-primary"></i> <span>TaskMaster</span>
+                <button class="mobile-menu-close d-md-none"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div class="user-profile-sm">
+                <img src="https://ui-avatars.com/api/?name=User" id="sidebar-avatar" class="avatar">
+                <div class="user-info">
+                    <h4 id="sidebar-name">Loading...</h4>
+                    <span class="badge badge-streak"><i class="fas fa-fire"></i> <span id="sidebar-streak">0</span> Days</span>
+                </div>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="tasks.html" class="nav-link"><i class="fas fa-tasks"></i> <span>Tasks</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="calendar.html" class="nav-link"><i class="fas fa-calendar-alt"></i> <span>Calendar</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a href="achievements.html" class="nav-link"><i class="fas fa-trophy"></i> <span>Achievements</span></a>
+                </li>
+            </ul>
+
+            <div class="sidebar-bottom">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="theme-toggle"><i class="fas fa-moon"></i> <span>Dark Mode</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="profile.html" class="nav-link"><i class="fas fa-cog"></i> <span>Settings</span></a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a href="#" id="logout-btn" class="nav-link text-danger"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <button class="mobile-menu-open d-md-none"><i class="fas fa-bars"></i></button>
+                <div class="page-title">
+                    <h1>Achievements</h1>
+                    <p class="text-muted">Track your progress and unlocked badges.</p>
+                </div>
+                <div class="topbar-actions">
+                    <div class="user-score-badge">
+                        <i class="fas fa-star text-yellow"></i> 
+                        <span id="user-score" class="font-weight-bold ml-1">0</span> pts
+                    </div>
+                    <div class="profile-dropdown">
+                        <button class="profile-dropdown-toggle" id="profile-dropdown-btn">
+                            <img src="https://ui-avatars.com/api/?name=User" alt="Avatar" id="topbar-avatar" class="avatar-sm">
+                            <span id="topbar-username">Loading...</span>
+                            <i class="fas fa-chevron-down" style="font-size: 0.75rem; margin-left: 0.25rem;"></i>
+                        </button>
+                        <div class="dropdown-menu" id="profile-dropdown-menu">
+                            <a href="profile.html" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
+                            <a href="profile.html" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-danger" id="dropdown-logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                
+                <div class="glass-card mb-4 text-center py-5 hero-gradient text-white rounded">
+                    <h2 class="mb-2">Keep up the great work!</h2>
+                    <p class="opacity-80">Complete tasks and maintain your streak to unlock more badges.</p>
+                </div>
+
+                <h3 class="mb-3">Unlocked Badges</h3>
+                <div class="grid grid-cols-4 gap-4" id="achievements-container">
+                    <!-- Loaded by JS -->
+                    <div class="col-span-4 text-center py-5 text-muted">
+                        <i class="fas fa-spinner fa-spin text-2xl mb-2"></i>
+                        <p>Loading achievements...</p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/achievements.js"></script>
+</body>
+</html>
