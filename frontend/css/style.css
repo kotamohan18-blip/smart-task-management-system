@@ -49,6 +49,8 @@ body.dark-theme {
     --priority-med-text: #fcd34d;
     --priority-low: rgba(16, 185, 129, 0.2);
     --priority-low-text: #6ee7b7;
+
+    color-scheme: dark;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -659,4 +661,42 @@ body.dark-theme .form-control {
 #theme-toggle:hover i {
     transform: rotate(30deg) scale(1.1);
 }
+
+/* ==========================================================================
+   Dark Theme Dropdown/Select Styling Fix
+   ========================================================================== */
+
+/* Apply dark mode styling to all select elements and options */
+body.dark-theme select {
+    color-scheme: dark;
+    background-color: var(--bg-sidebar) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-color) !important;
+}
+
+body.dark-theme select option {
+    background-color: var(--bg-sidebar) !important;
+    color: var(--text-main) !important;
+}
+
+/* Focus state for select elements in dark theme */
+body.dark-theme select:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px var(--primary-light) !important;
+    outline: none !important;
+}
+
+/* Hover state for select elements in dark theme */
+body.dark-theme select:hover {
+    border-color: var(--primary) !important;
+}
+
+/* Selected/checked option and hover/focus state styling for options */
+body.dark-theme select option:checked,
+body.dark-theme select option:hover,
+body.dark-theme select option:focus {
+    background-color: var(--primary) !important;
+    color: #ffffff !important;
+}
+
 
