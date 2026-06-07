@@ -86,5 +86,14 @@
             window.location.href = 'dashboard.html';
         }
     </script>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-theme");
+    }
+});
+</script>
 </body>
 </html>
