@@ -207,7 +207,3 @@ The application is deployed on **Render**, communicating with a cloud database h
 *   **Push Notifications**: Add browser-based notifications when task states are updated.
 
 ---
-
-## 9. License
-
-This project is licensed under the MIT License. You are free to modify and utilize this project for personal portfolios or educational evaluations.
