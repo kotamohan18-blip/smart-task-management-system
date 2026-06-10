@@ -165,7 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 4. Auth & Sidebar setup
-    const isProtected = !['login.html', 'register.html', 'index.html', ''].includes(window.location.pathname.split('/').pop());
+    const publicPages = [
+        'login.html', 'login',
+        'register.html', 'register',
+        'index.html', 'index',
+        'forgot-password.html', 'forgot-password',
+        ''
+    ];
+    const isProtected = !publicPages.includes(window.location.pathname.split('/').pop());
     const token = localStorage.getItem('token');
     
     if (isProtected && !token) {
