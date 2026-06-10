@@ -8,7 +8,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="auth-body light-theme">
+<body class="auth-body">
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            let userTheme = savedTheme;
+            if (!userTheme) {
+                const userStr = localStorage.getItem('user');
+                if (userStr) {
+                    try {
+                        const user = JSON.parse(userStr);
+                        userTheme = user.preferences?.theme;
+                    } catch(e) {}
+                }
+            }
+            if (userTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+            } else {
+                document.body.classList.add('light-theme');
+            }
+        })();
+    </script>
     <div class="split-layout">
         <div class="split-left">
             <div class="split-content">
@@ -74,14 +94,5 @@
             window.location.href = 'dashboard.html';
         }
     </script>
-    <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem("theme");
-
-    if (savedTheme === "dark") {
-        document.body.classList.add("dark-theme");
-    }
-});
-</script>
 </body>
 </html>

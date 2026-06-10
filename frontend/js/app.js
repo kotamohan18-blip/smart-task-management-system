@@ -52,49 +52,99 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileClose.addEventListener('click', () => sidebar.classList.remove('open'));
     }
 
-    // 3. Theme Toggle
-    const themeBtn = document.getElementById('theme-toggle');
-    const body = document.body;
-    
-    // Check saved theme
-    let userTheme = localStorage.getItem('theme') || 'light';
-    
-    // Try to get from user profile if logged in
-    const userStr = localStorage.getItem('user');
-    if (userStr) {
-        try {
-            const user = JSON.parse(userStr);
-            if (user.preferences && user.preferences.theme) {
-                userTheme = user.preferences.theme;
+    // 3. Theme Toggle & Initialization
+    window.initializeTheme = function() {
+        const body = document.body;
+        if (!body) return;
+
+        let userTheme = localStorage.getItem('theme');
+        const userStr = localStorage.getItem('user');
+        let user = null;
+
+        if (userStr) {
+            try {
+                user = JSON.parse(userStr);
+                if (user && user.preferences && user.preferences.theme) {
+                    userTheme = user.preferences.theme;
+                }
+            } catch(e) {}
+        }
+
+        if (!userTheme) {
+            userTheme = 'light';
+        }
+
+        if (userTheme === 'dark') {
+            body.classList.remove('light-theme');
+            body.classList.add('dark-theme');
+        } else {
+            body.classList.remove('dark-theme');
+            body.classList.add('light-theme');
+        }
+
+        // Keep local storage settings in sync
+        localStorage.setItem('theme', userTheme);
+        if (user) {
+            user.preferences = user.preferences || {};
+            user.preferences.theme = userTheme;
+            localStorage.setItem('user', JSON.stringify(user));
+        }
+
+        // Update UI elements
+        const themeBtn = document.getElementById('theme-toggle');
+        if (themeBtn) {
+            const icon = themeBtn.querySelector('i');
+            if (icon) {
+                icon.className = userTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             }
-        } catch(e) {}
-    }
+            const span = themeBtn.querySelector('span');
+            if (span) {
+                span.textContent = userTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+            }
+        }
+    };
 
-    if (userTheme === 'dark') {
-        body.classList.remove('light-theme');
-        body.classList.add('dark-theme');
-        if (themeBtn) themeBtn.querySelector('i').className = 'fas fa-sun';
-    }
+    // Run theme initialization immediately
+    window.initializeTheme();
 
+    const themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) {
         themeBtn.addEventListener('click', async (e) => {
             e.preventDefault();
+            const body = document.body;
             const isDark = body.classList.contains('dark-theme');
             const newTheme = isDark ? 'light' : 'dark';
-            
-            if (isDark) {
-                body.classList.remove('dark-theme');
-                body.classList.add('light-theme');
-                themeBtn.querySelector('i').className = 'fas fa-moon';
-            } else {
+
+            if (newTheme === 'dark') {
                 body.classList.remove('light-theme');
                 body.classList.add('dark-theme');
-                themeBtn.querySelector('i').className = 'fas fa-sun';
+            } else {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
             }
-            
+
             localStorage.setItem('theme', newTheme);
+            const userStr = localStorage.getItem('user');
+            if (userStr) {
+                try {
+                    const user = JSON.parse(userStr);
+                    user.preferences = user.preferences || {};
+                    user.preferences.theme = newTheme;
+                    localStorage.setItem('user', JSON.stringify(user));
+                } catch(e) {}
+            }
+
+            const icon = themeBtn.querySelector('i');
+            if (icon) {
+                icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            }
+            const span = themeBtn.querySelector('span');
+            if (span) {
+                span.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+            }
+
             document.dispatchEvent(new CustomEvent('themechanged', { detail: { theme: newTheme } }));
-            
+
             // Sync with backend if logged in
             const token = localStorage.getItem('token');
             if (token) {
