@@ -25,6 +25,8 @@ window.showToast = function(message, type = 'success') {
 
 // Authentication Checks & Sidebar Population
 document.addEventListener('DOMContentLoaded', () => {
+    let userStr = localStorage.getItem('user');
+
     // 1. Password toggles
     document.querySelectorAll('.password-toggle').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -58,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!body) return;
 
         let userTheme = localStorage.getItem('theme');
-        const userStr = localStorage.getItem('user');
         let user = null;
 
         if (userStr) {
@@ -124,13 +125,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             localStorage.setItem('theme', newTheme);
-            const userStr = localStorage.getItem('user');
             if (userStr) {
                 try {
                     const user = JSON.parse(userStr);
                     user.preferences = user.preferences || {};
                     user.preferences.theme = newTheme;
-                    localStorage.setItem('user', JSON.stringify(user));
+                    const updatedUserStr = JSON.stringify(user);
+                    localStorage.setItem('user', updatedUserStr);
+                    userStr = updatedUserStr;
                 } catch(e) {}
             }
 
